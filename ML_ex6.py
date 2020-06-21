@@ -258,6 +258,7 @@ def main():
         i = i+1
 
     params_values = train(np.transpose(X_set), np.transpose(Y_set), NN_1_ARCHITECTURE, 100, 2)
+    prediction_probs_numpy, _ = full_forward_propagation(np.transpose(X_set), params_values, NN_1_ARCHITECTURE)
     i = 0
         #x = create_parity_vectors()
 
