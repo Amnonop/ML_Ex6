@@ -221,12 +221,12 @@ def create_parity_vectors():
     for i in range(9):
         temp_str = np.binary_repr(i, width=3)
         temp_vec = np.array(list(temp_str))
-        temp_par = np.bitwise_xor(x.item(0),x.item(1))
-        temp_par = np.bitwise_xor(temp_par,x.item(2))
+        temp_par = np.bitwise_xor(temp_vec.item(0),temp_vec.item(1))
+        temp_par = np.bitwise_xor(temp_par,temp_vec.item(2))
         data_set[temp_vec] = temp_par
 
 
-def run_over_data:
+def run_over_data(data_set):
 #for random iteration:
     r = list(range(2000))
     for i in r:
@@ -238,15 +238,37 @@ def run_over_data:
 def main():
     print("""g""")
     x = np.random.randint(9, size=(1,3))
-    print (x)
-    print(x.item(0))
-    print(x.item(1))
-    print(x.item(2))
-    print (np.bitwise_xor(x.item(1),x.item(2)))
+    data_set = {}
+    for i in range(8):
+        temp_str = np.binary_repr(i, width=3)
+        temp_vec = np.array(list(temp_str))
+        temp_par = np.bitwise_xor(int(temp_vec.item(0)),int(temp_vec.item(1)))
+        temp_par = np.bitwise_xor(int(temp_par),int(temp_vec.item(2)))
+        print(type(temp_par))
+        data_set[temp_str] = int(temp_par)
+    X_set = np.zeros((8,3), dtype = int)
+    Y_set = np.zeros((8, 1), dtype = int)
+    i = 0
+    j = 0
+    for key, value in data_set.items():
+        for j in range(3):
+            X_set[i, j] = int(key[j])
+        Y_set[i,:] = int(value)
+        j = 0
+        i = i+1
 
-    #x = create_parity_vectors()
+    params_values = train(np.transpose(X_set), np.transpose(Y_set), NN_1_ARCHITECTURE, 100, 2)
+    i = 0
+        #x = create_parity_vectors()
 
-    print("""g""")
+
+
+
+#shuffling the keys and turn into a matrix
+
+
+
+
 
 
 
