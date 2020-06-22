@@ -1,7 +1,7 @@
+# Amnon Ophir 302445804, Ross Bolotin 310918610
+
 import numpy as np
 import random
-
-
 
 seed = 111
 
@@ -92,11 +92,11 @@ def full_forward_propagation(X, params_values, nn_architecture):
     return A_curr, memory
 
 
-def get_cost_value(Y_hat, Y):
+def get_cost_value(y_hat, y):
     # number of examples
-    m = Y_hat.shape[1]
+    m = y_hat.shape[1]
     # calculation of the cost according to the formula
-    cost = -1 / m * (np.dot(Y, np.log(Y_hat).T) + np.dot(1 - Y, np.log(1 - Y_hat).T))
+    cost = -1 / m * (np.dot(y, np.log(y_hat).T) + np.dot(1 - y, np.log(1 - y_hat).T))
     return np.squeeze(cost)
 
 
@@ -180,10 +180,10 @@ def update(params_values, grads_values, nn_architecture, learning_rate):
         params_values["W" + str(layer_idx)] -= learning_rate * grads_values["dW" + str(layer_idx)]
         params_values["b" + str(layer_idx)] -= learning_rate * grads_values["db" + str(layer_idx)]
 
-    return params_values;
+    return params_values
 
 
-def train(X, Y, nn_architecture, epochs, learning_rate, verbose=False, callback=None):
+def train(x, y, nn_architecture, epochs, learning_rate, verbose=False, callback=None):
     # initiation of neural net parameters
     params_values = init_layers(nn_architecture, 2)
     # initiation of lists storing the history
@@ -194,16 +194,16 @@ def train(X, Y, nn_architecture, epochs, learning_rate, verbose=False, callback=
     # performing calculations for subsequent iterations
     for i in range(epochs):
         # step forward
-        Y_hat, cashe = full_forward_propagation(X, params_values, nn_architecture)
+        y_hat, cashe = full_forward_propagation(x, params_values, nn_architecture)
 
         # calculating metrics and saving them in history
-        cost = get_cost_value(Y_hat, Y)
+        cost = get_cost_value(y_hat, y)
         cost_history.append(cost)
-        accuracy = get_accuracy_value(Y_hat, Y)
+        accuracy = get_accuracy_value(y_hat, y)
         accuracy_history.append(accuracy)
 
         # step backward - calculating gradient
-        grads_values = full_backward_propagation(Y_hat, Y, cashe, params_values, nn_architecture)
+        grads_values = full_backward_propagation(y_hat, y, cashe, params_values, nn_architecture)
         # updating model state
         params_values = update(params_values, grads_values, nn_architecture, learning_rate)
 
@@ -237,28 +237,26 @@ def run_over_data(data_set):
 
 def main():
     print("""g""")
-    x = np.random.randint(9, size=(1,3))
+    x = np.random.randint(9, size=(1, 3))
     data_set = {}
     for i in range(8):
         temp_str = np.binary_repr(i, width=3)
         temp_vec = np.array(list(temp_str))
-        temp_par = np.bitwise_xor(int(temp_vec.item(0)),int(temp_vec.item(1)))
-        temp_par = np.bitwise_xor(int(temp_par),int(temp_vec.item(2)))
+        temp_par = np.bitwise_xor(int(temp_vec.item(0)), int(temp_vec.item(1)))
+        temp_par = np.bitwise_xor(int(temp_par), int(temp_vec.item(2)))
         print(type(temp_par))
         data_set[temp_str] = int(temp_par)
-    X_set = np.zeros((8,3), dtype = int)
-    Y_set = np.zeros((8, 1), dtype = int)
+    x_set = np.zeros((8, 3), dtype=int)
+    y_set = np.zeros((8, 1), dtype=int)
     i = 0
-    j = 0
     for key, value in data_set.items():
         for j in range(3):
-            X_set[i, j] = int(key[j])
-        Y_set[i,:] = int(value)
-        j = 0
+            x_set[i, j] = int(key[j])
+        y_set[i, :] = int(value)
         i = i+1
 
-    params_values = train(np.transpose(X_set), np.transpose(Y_set), NN_1_ARCHITECTURE, 100, 2)
-    prediction_probs_numpy, _ = full_forward_propagation(np.transpose(X_set), params_values, NN_1_ARCHITECTURE)
+    params_values = train(np.transpose(x_set), np.transpose(y_set), NN_1_ARCHITECTURE, 100, 2)
+    prediction_probs_numpy, _ = full_forward_propagation(np.transpose(x_set), params_values, NN_1_ARCHITECTURE)
     i = 0
         #x = create_parity_vectors()
 
