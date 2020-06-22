@@ -4,9 +4,12 @@ import numpy as np
 
 import random
 
+#Globals
+data_set = {}
 seed = 111
 accuracy_history = []
 s_error_history = [None]*2000
+#########
 
 NN_1_ARCHITECTURE = [
     {"input_dim": 3, "output_dim": 9, "activation": "sigmoid"},
@@ -242,10 +245,7 @@ def run_over_data(data_set):
             ###RUN###
 
 
-def main():
-    print("""g""")
-    x = np.random.randint(9, size=(1, 3))
-    data_set = {}
+def create_data_set():
     for i in range(8):
         temp_str = np.binary_repr(i, width=3)
         temp_vec = np.array(list(temp_str))
@@ -260,10 +260,14 @@ def main():
         for j in range(3):
             x_set[i, j] = int(key[j])
         y_set[i, :] = int(value)
-        i = i+1
+        i = i + 1
+    return x_set, y_set
 
+    ##SECTION_A##
+def section_one():
+    x_set, y_set = create_data_set()
     for i in range(100):
-        params_values, accuracy_history = train(np.transpose(x_set), np.transpose(y_set), NN_1_ARCHITECTURE, 200, 2) #etta=2
+        params_values, accuracy_history = train(np.transpose(x_set), np.transpose(y_set), NN_1_ARCHITECTURE, 2000, 2) #etta=2
 
     x = np.arange(1, 2001)
     plt.title("Square error per iteration, section a")
@@ -271,15 +275,25 @@ def main():
     plt.ylabel("square error")
     plt.plot(x, s_error_history)
     plt.show()
-    i = i + 1
+
+def section_two():
+    x_set, y_set = create_data_set()
+    for i in range(100):
+        params_values, accuracy_history = train(np.transpose(x_set), np.transpose(y_set), NN_2_ARCHITECTURE, 2000, 2) #etta=2
+
+    x = np.arange(1, 2001)
+    plt.title("Square error per iteration, section a")
+    plt.xlabel("iteration")
+    plt.ylabel("square error")
+    plt.plot(x, s_error_history)
+    plt.show()
 
 
-#shuffling the keys and turn into a matrix
-
-
-
-
-
+def main():
+    #SECTION_A
+    section_one()
+    #SECTION_B
+    section_two()
 
 
 if __name__ == "__main__":
