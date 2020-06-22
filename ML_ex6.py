@@ -1,10 +1,12 @@
 # Amnon Ophir 302445804, Ross Bolotin 310918610
-
+import matplotlib.pyplot as plt
 import numpy as np
+
 import random
 
 seed = 111
-
+accuracy_history = []
+s_error_history = [None]*2000
 
 NN_1_ARCHITECTURE = [
     {"input_dim": 3, "output_dim": 9, "activation": "sigmoid"},
@@ -12,6 +14,11 @@ NN_1_ARCHITECTURE = [
     {"input_dim": 3, "output_dim": 1, "activation": "sigmoid"},
 ]
 
+NN_2_ARCHITECTURE = [
+    {"input_dim": 3, "output_dim": 18, "activation": "sigmoid"},
+    {"input_dim": 18, "output_dim": 6, "activation": "sigmoid"},
+    {"input_dim": 6, "output_dim": 1, "activation": "sigmoid"},
+]
 
 def init_layers(nn_architecture, seed=99):
     # random seed initiation
@@ -33,10 +40,9 @@ def init_layers(nn_architecture, seed=99):
         # initiating the values of the W matrix
         # and vector b for subsequent layers
         params_values['W' + str(layer_idx)] = np.random.randn(
-            layer_output_size, layer_input_size) * 0.1
+            layer_output_size, layer_input_size)
         params_values['b' + str(layer_idx)] = np.random.randn(
-            layer_output_size, 1) * 0.1
-
+            layer_output_size, 1)
     return params_values
 
 
@@ -97,7 +103,8 @@ def get_cost_value(y_hat, y):
     m = y_hat.shape[1]
     # calculation of the cost according to the formula
     cost = -1 / m * (np.dot(y, np.log(y_hat).T) + np.dot(1 - y, np.log(1 - y_hat).T))
-    return np.squeeze(cost)
+    s_error = np.linalg.norm(y_hat-y)/8
+    return np.squeeze(cost)  , s_error
 
 
 # an auxiliary function that converts probability into class
@@ -185,11 +192,11 @@ def update(params_values, grads_values, nn_architecture, learning_rate):
 
 def train(x, y, nn_architecture, epochs, learning_rate, verbose=False, callback=None):
     # initiation of neural net parameters
-    params_values = init_layers(nn_architecture, 2)
+    params_values = init_layers(nn_architecture)
     # initiation of lists storing the history
     # of metrics calculated during the learning process
     cost_history = []
-    accuracy_history = []
+
 
     # performing calculations for subsequent iterations
     for i in range(epochs):
@@ -197,10 +204,10 @@ def train(x, y, nn_architecture, epochs, learning_rate, verbose=False, callback=
         y_hat, cashe = full_forward_propagation(x, params_values, nn_architecture)
 
         # calculating metrics and saving them in history
-        cost = get_cost_value(y_hat, y)
+        cost, s_error = get_cost_value(y_hat, y)
         cost_history.append(cost)
         accuracy = get_accuracy_value(y_hat, y)
-        accuracy_history.append(accuracy)
+        s_error_history[i] = s_error/100
 
         # step backward - calculating gradient
         grads_values = full_backward_propagation(y_hat, y, cashe, params_values, nn_architecture)
@@ -213,7 +220,7 @@ def train(x, y, nn_architecture, epochs, learning_rate, verbose=False, callback=
             if (callback is not None):
                 callback(i, params_values)
 
-    return params_values
+    return params_values , accuracy_history
 
 
 def create_parity_vectors():
@@ -255,12 +262,16 @@ def main():
         y_set[i, :] = int(value)
         i = i+1
 
-    params_values = train(np.transpose(x_set), np.transpose(y_set), NN_1_ARCHITECTURE, 100, 2)
-    prediction_probs_numpy, _ = full_forward_propagation(np.transpose(x_set), params_values, NN_1_ARCHITECTURE)
-    i = 0
-        #x = create_parity_vectors()
+    for i in range(100):
+        params_values, accuracy_history = train(np.transpose(x_set), np.transpose(y_set), NN_1_ARCHITECTURE, 200, 2) #etta=2
 
-
+    x = np.arange(1, 2001)
+    plt.title("Square error per iteration, section a")
+    plt.xlabel("iteration")
+    plt.ylabel("square error")
+    plt.plot(x, s_error_history)
+    plt.show()
+    i = i + 1
 
 
 #shuffling the keys and turn into a matrix
