@@ -268,19 +268,19 @@ def section_one():
     x_set, y_set = create_data_set()
     for i in range(100):
         params_values, accuracy_history = train(np.transpose(x_set), np.transpose(y_set), NN_1_ARCHITECTURE, 2000, 2) #etta=2
-
+    plot1 = plt.figure(1)
     x = np.arange(1, 2001)
     plt.title("Square error per iteration, section A")
     plt.xlabel("iteration")
     plt.ylabel("square error")
     plt.plot(x, s_error_history)
-    plt.show()
+
 
 def section_two():
     x_set, y_set = create_data_set()
     for i in range(100):
         params_values, accuracy_history = train(np.transpose(x_set), np.transpose(y_set), NN_2_ARCHITECTURE, 2000, 2) #etta=2
-
+    plot2 = plt.figure(2)
     x = np.arange(1, 2001)
     plt.title("Square error per iteration, section B")
     plt.xlabel("iteration")
