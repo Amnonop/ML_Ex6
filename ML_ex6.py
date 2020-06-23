@@ -9,15 +9,13 @@ accuracy_history = []
 s_error_history = [None] * 2000
 
 NN_1_ARCHITECTURE = [
-    {"input_dim": 3, "output_dim": 9},
-    {"input_dim": 9, "output_dim": 3},
-    {"input_dim": 3, "output_dim": 1},
+    {"input_dim": 3, "output_dim": 3},
+    {"input_dim": 3, "output_dim": 1}
 ]
 
 NN_2_ARCHITECTURE = [
-    {"input_dim": 3, "output_dim": 18},
-    {"input_dim": 18, "output_dim": 6},
-    {"input_dim": 6, "output_dim": 1},
+    {"input_dim": 3, "output_dim": 6},
+    {"input_dim": 6, "output_dim": 1}
 ]
 
 

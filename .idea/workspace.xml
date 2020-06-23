@@ -51,7 +51,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ML_Ex4" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.ML_Ex6">
+  <component name="RunManager" selected="Python.ML_ex6">
     <configuration name="ML_Ex6" type="PythonConfigurationType" factoryName="Python">
       <module name="ML_Ex6" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -100,6 +100,18 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -113,58 +125,55 @@
     </task>
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
   <component name="WindowStateProjectService">
     <state x="368" y="0" key="#ML_Ex6" timestamp="1592755255988">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="368" y="0" key="#ML_Ex6/0.0.1280.689@0.0.1280.689" timestamp="1592755255988" />
-    <state x="368" y="0" key="#ML_ex6" timestamp="1592859521597">
+    <state x="368" y="0" key="#ML_ex6" timestamp="1592909902703">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="368" y="0" key="#ML_ex6/0.0.1280.689@0.0.1280.689" timestamp="1592859521597" />
-    <state width="683" height="464" key="DebuggerActiveHint" timestamp="1592755307059">
+    <state x="368" y="0" key="#ML_ex6/0.0.1280.689@0.0.1280.689" timestamp="1592909902703" />
+    <state width="899" height="464" key="DebuggerActiveHint" timestamp="1592910161980">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="683" height="464" key="DebuggerActiveHint/0.0.1280.689@0.0.1280.689" timestamp="1592755307059" />
+    <state width="899" height="464" key="DebuggerActiveHint/0.0.1280.689@0.0.1280.689" timestamp="1592910161980" />
     <state x="421" y="103" key="FileChooserDialogImpl" timestamp="1592755187703">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="421" y="103" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1592755187703" />
-    <state width="1259" height="166" key="GridCell.Tab.0.bottom" timestamp="1592862594555">
+    <state width="1259" height="208" key="GridCell.Tab.0.bottom" timestamp="1592911581475">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1259" height="166" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1592862594555" />
-    <state width="1259" height="166" key="GridCell.Tab.0.center" timestamp="1592862594555">
+    <state width="1259" height="208" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1592911581475" />
+    <state width="1259" height="208" key="GridCell.Tab.0.center" timestamp="1592911581475">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1259" height="166" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1592862594555" />
-    <state width="1259" height="166" key="GridCell.Tab.0.left" timestamp="1592862594555">
+    <state width="1259" height="208" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1592911581475" />
+    <state width="1259" height="208" key="GridCell.Tab.0.left" timestamp="1592911581475">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1259" height="166" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1592862594555" />
-    <state width="1259" height="166" key="GridCell.Tab.0.right" timestamp="1592862594555">
+    <state width="1259" height="208" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1592911581475" />
+    <state width="1259" height="208" key="GridCell.Tab.0.right" timestamp="1592911581475">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1259" height="166" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1592862594555" />
-    <state width="1259" height="208" key="GridCell.Tab.1.bottom" timestamp="1592861733845">
+    <state width="1259" height="208" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1592911581475" />
+    <state width="1259" height="208" key="GridCell.Tab.1.bottom" timestamp="1592911582887">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1259" height="208" key="GridCell.Tab.1.bottom/0.0.1280.689@0.0.1280.689" timestamp="1592861733845" />
-    <state width="1259" height="208" key="GridCell.Tab.1.center" timestamp="1592861733845">
+    <state width="1259" height="208" key="GridCell.Tab.1.bottom/0.0.1280.689@0.0.1280.689" timestamp="1592911582887" />
+    <state width="1259" height="208" key="GridCell.Tab.1.center" timestamp="1592911582887">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1259" height="208" key="GridCell.Tab.1.center/0.0.1280.689@0.0.1280.689" timestamp="1592861733845" />
-    <state width="1259" height="208" key="GridCell.Tab.1.left" timestamp="1592861733845">
+    <state width="1259" height="208" key="GridCell.Tab.1.center/0.0.1280.689@0.0.1280.689" timestamp="1592911582887" />
+    <state width="1259" height="208" key="GridCell.Tab.1.left" timestamp="1592911582887">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1259" height="208" key="GridCell.Tab.1.left/0.0.1280.689@0.0.1280.689" timestamp="1592861733845" />
-    <state width="1259" height="208" key="GridCell.Tab.1.right" timestamp="1592861733845">
+    <state width="1259" height="208" key="GridCell.Tab.1.left/0.0.1280.689@0.0.1280.689" timestamp="1592911582887" />
+    <state width="1259" height="208" key="GridCell.Tab.1.right" timestamp="1592911582887">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1259" height="208" key="GridCell.Tab.1.right/0.0.1280.689@0.0.1280.689" timestamp="1592861733845" />
+    <state width="1259" height="208" key="GridCell.Tab.1.right/0.0.1280.689@0.0.1280.689" timestamp="1592911582887" />
     <state x="231" y="0" key="SettingsEditor" timestamp="1592859588981">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -181,6 +190,23 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ML_ex6.py</url>
+          <line>269</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ML_ex6.py</url>
+          <line>59</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ML_ex6.py</url>
+          <line>62</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
