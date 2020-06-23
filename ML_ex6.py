@@ -23,26 +23,26 @@ def init_layers(nn_architecture, seed=99):
     # random seed initiation
     np.random.seed(seed)
     # number of layers in our neural network
-    number_of_layers = len(nn_architecture)
+    num_of_layers = len(nn_architecture)
     # parameters storage initiation
-    params_values = {}
+    params_vals = {}
 
     # iteration over network layers
     for idx, layer in enumerate(nn_architecture):
         # we number network layers from 1
-        layer_idx = idx + 1
+        layer_number = idx + 1
 
         # extracting the number of units in layers
-        layer_input_size = layer["input_dim"]
-        layer_output_size = layer["output_dim"]
+        layer_inp_size = layer["input_dim"]
+        layer_outp_size = layer["output_dim"]
 
         # initiating the values of the W matrix
         # and vector b for subsequent layers
-        params_values['W' + str(layer_idx)] = np.random.randn(
-            layer_output_size, layer_input_size)
-        params_values['b' + str(layer_idx)] = np.random.randn(
-            layer_output_size, 1)
-    return params_values
+        params_vals['W' + str(layer_number)] = np.random.randn(
+            layer_outp_size, layer_inp_size)
+        params_vals['b' + str(layer_number)] = np.random.randn(
+            layer_outp_size, 1)
+    return params_vals
 
 
 def sigmoid(z):
@@ -54,7 +54,7 @@ def sigmoid_backward(dA, z):
     return dA * sig * (1 - sig)
 
 
-def single_layer_forward_propagation(A_prev, W_curr, b_curr):
+def single_layer_fwd_prop(A_prev, W_curr, b_curr):
     # calculation of the input value for the activation function
     z_curr = np.dot(W_curr, A_prev) + b_curr
 
@@ -65,32 +65,32 @@ def single_layer_forward_propagation(A_prev, W_curr, b_curr):
     return activation_func(z_curr), z_curr
 
 
-def full_forward_propagation(X, params_values, nn_architecture):
+def full_fwd_prop(X, params_values, nn_architecture):
     # creating a temporary memory to store the information needed for a backward step
     memory = {}
     # X vector is the activation for layer 0 
-    A_curr = X
+    x_curr = X
 
     # iteration over network layers
     for idx, layer in enumerate(nn_architecture):
         # we number network layers from 1
         layer_idx = idx + 1
         # transfer the activation from the previous iteration
-        A_prev = A_curr
+        x_prev = x_curr
 
         # extraction of W for the current layer
         W_curr = params_values["W" + str(layer_idx)]
         # extraction of b for the current layer
         b_curr = params_values["b" + str(layer_idx)]
         # calculation of activation for the current layer
-        A_curr, Z_curr = single_layer_forward_propagation(A_prev, W_curr, b_curr)
+        x_curr, Z_curr = single_layer_fwd_prop(x_prev, W_curr, b_curr)
 
         # saving calculated values in the memory
-        memory["A" + str(idx)] = A_prev
+        memory["A" + str(idx)] = x_prev
         memory["Z" + str(layer_idx)] = Z_curr
 
     # return of prediction vector and a dictionary containing intermediate values
-    return A_curr, memory
+    return x_curr, memory
 
 
 def get_cost_value(y_hat, y):
@@ -115,24 +115,24 @@ def get_accuracy_value(y_hat, y):
     return (y_hat_ == y).all(axis=0).mean()
 
 
-def single_layer_backward_propagation(dA_curr, w_curr, b_curr, z_curr, A_prev):
+def single_layer_backward_propagation(dx_curr, w_curr, b_curr, z_curr, x_prev):
     # number of examples
-    m = A_prev.shape[1]
+    m = x_prev.shape[1]
 
     # selection of activation function
     backward_activation_func = sigmoid_backward
 
     # calculation of the activation function derivative
-    dZ_curr = backward_activation_func(dA_curr, z_curr)
+    dZ_curr = backward_activation_func(dx_curr, z_curr)
 
     # derivative of the matrix W
-    dW_curr = np.dot(dZ_curr, A_prev.T) / m
+    dW_curr = np.dot(dZ_curr, x_prev.T) / m
     # derivative of the vector b
     db_curr = np.sum(dZ_curr, axis=1, keepdims=True) / m
     # derivative of the matrix A_prev
-    dA_prev = np.dot(w_curr.T, dZ_curr)
+    dx_prev = np.dot(w_curr.T, dZ_curr)
 
-    return dA_prev, dW_curr, db_curr
+    return dx_prev, dW_curr, db_curr
 
 
 def full_backward_propagation(y_hat, y, memory, params_values, nn_architecture):
@@ -144,22 +144,22 @@ def full_backward_propagation(y_hat, y, memory, params_values, nn_architecture):
     y = y.reshape(y_hat.shape)
 
     # initiation of gradient descent algorithm
-    dA_prev = - (np.divide(y, y_hat) - np.divide(1 - y, 1 - y_hat));
+    dx_prev = - (np.divide(y, y_hat) - np.divide(1 - y, 1 - y_hat));
 
     for layer_idx_prev, layer in reversed(list(enumerate(nn_architecture))):
         # we number network layers from 1
         layer_idx_curr = layer_idx_prev + 1
 
-        dA_curr = dA_prev
+        dx_curr = dx_prev
 
-        A_prev = memory["A" + str(layer_idx_prev)]
+        x_c = memory["A" + str(layer_idx_prev)]
         Z_curr = memory["Z" + str(layer_idx_curr)]
 
         W_curr = params_values["W" + str(layer_idx_curr)]
         b_curr = params_values["b" + str(layer_idx_curr)]
 
-        dA_prev, dW_curr, db_curr = single_layer_backward_propagation(
-            dA_curr, W_curr, b_curr, Z_curr, A_prev)
+        dx_prev, dW_curr, db_curr = single_layer_backward_propagation(
+            dx_curr, W_curr, b_curr, Z_curr, x_c)
 
         grads_values["dW" + str(layer_idx_curr)] = dW_curr
         grads_values["db" + str(layer_idx_curr)] = db_curr
@@ -187,7 +187,7 @@ def train(x, y, nn_architecture, epochs, learning_rate, verbose=False, callback=
     # performing calculations for subsequent iterations
     for i in range(epochs):
         # step forward
-        y_hat, cashe = full_forward_propagation(x, params_values, nn_architecture)
+        y_hat, cashe = full_fwd_prop(x, params_values, nn_architecture)
 
         # calculating metrics and saving them in history
         cost, s_error = get_cost_value(y_hat, y)
