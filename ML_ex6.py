@@ -243,9 +243,9 @@ def section_one():
         params_values, accuracy_history = train(np.transpose(x_set), np.transpose(y_set), NN_1_ARCHITECTURE, 2000, 2)  # etta=2
     plot1 = plt.figure(1)
     x = np.arange(1, 2001)
-    plt.title("Square error per iteration, section A")
+    plt.title("Mean Square Error per iteration, section B")
     plt.xlabel("iteration")
-    plt.ylabel("square error")
+    plt.ylabel("Mean Square Error")
     plt.plot(x, s_error_history)
 
 
@@ -255,9 +255,9 @@ def section_two():
         params_values, accuracy_history = train(np.transpose(x_set), np.transpose(y_set), NN_2_ARCHITECTURE, 2000, 2)  # etta=2
     plot2 = plt.figure(2)
     x = np.arange(1, 2001)
-    plt.title("Square error per iteration, section B")
+    plt.title("Mean Square Error per iteration, section B")
     plt.xlabel("iteration")
-    plt.ylabel("square error")
+    plt.ylabel("Mean Square Error")
     plt.plot(x, s_error_history)
     plt.show()
 
